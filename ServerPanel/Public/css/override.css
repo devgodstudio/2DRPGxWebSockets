@@ -1,0 +1,11 @@
+/* Override default styles */
+/* import bootstrap colors */
+@import url('2drpgx.css');
+
+body{
+    background-image: none;
+    background-color: var(--bs-navbar-color);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #333;
+}
