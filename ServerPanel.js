@@ -7,9 +7,8 @@ class ServerPanel {
     }
 
     renderPanel() {
-        this.res.writeHead(200, { 'Content-Type': 'text/html' });
-        this.res.write('<h1>Server Panel</h1>');
-        this.res.end();
+        //controller logic goes here
+        //render the server panel
     }
 }
 
