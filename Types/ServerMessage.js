@@ -1,9 +1,9 @@
 class ServerMessage{
-    constructor(user_id, message, data){
-
-        //this can either be the user id or the character id since we want to keep this in one class and in one variable
-        this.user_id = user_id; //this is the user id that will be used to send the message to the client
-        this.message = message; //this is the message that will be sent to the client
-        this.data = data; //this is the class that will be used to send data to the client
+    constructor(Token, Message, Data){
+        this.Token = Token; // null at first once the user authenticates, the token is how the server knows the user is authenticated and who they are
+        this.Message = Message;
+        this.Data = Data;
     }
 }
+
+module.exports = ServerMessage;

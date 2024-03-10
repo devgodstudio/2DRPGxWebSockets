@@ -1,7 +1,6 @@
-//This validation class will be used to validate the user input and the game logic
-//The game logic will be handled in the gameManager class
+const bcrypt = require("bcrypt");
+
 class Validation{
-//This function will validate the user input
     static validateInput(input){
         return input !== null || input !== "" || input !== Validation.validateCharacters(input);
     }
@@ -21,7 +20,24 @@ class Validation{
         return !!input.match(/^[0-9]+\.[0-9]+$/);
     }
 
+    //is valid password bcrypt
+    static async validatePassword(submittedPassword, storedHash) {
+        return bcrypt.compare(submittedPassword, storedHash); // Returns a promise that resolves to true or false
+    }
+
+    static hashPassword(password){
+        return bcrypt.hash(password, 10); // Returns a promise
+    }
+
+    static JwtToken() {
+
+        //generate a random string
+        const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+    }
 }
 
 //export the class
-module.exports = Validation;
+module.exports = {
+    Validation
+}
