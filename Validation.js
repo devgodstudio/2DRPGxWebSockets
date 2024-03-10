@@ -3,42 +3,22 @@
 class Validation{
 //This function will validate the user input
     static validateInput(input){
-        if(input !== null || input !== "" || input !== Validation.validateCharacters(input)) {
-            return true;
-        }
-        else{
-            return false;
-        }
+        return input !== null || input !== "" || input !== Validation.validateCharacters(input);
     }
 
     //invalid characters
     static validateCharacters(input){
-        if(input.match(/^[a-zA-Z]+$/)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return !!input.match(/^[a-zA-Z]+$/);
     }
 
     //is valid integer
     static validateInteger(input){
-        if(input.match(/^[0-9]+$/)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return !!input.match(/^[0-9]+$/);
     }
 
     //is valid float
     static validateFloat(input){
-        if(input.match(/^[0-9]+\.[0-9]+$/)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return !!input.match(/^[0-9]+\.[0-9]+$/);
     }
 
 }

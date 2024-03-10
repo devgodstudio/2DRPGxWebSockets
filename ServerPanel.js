@@ -31,13 +31,14 @@ function isAuthenticated(req, res, next) {
 
 // Define protected route
 ServerPanel.get('/', isAuthenticated, (req, res) => {
-    res.render('Main', { pageTitle: '2DRPGx Server Panel', message: 'Welcome to the server administration panel!' });
+    res.render('Main', { pageTitle: '2DRPGx Server Panel', message: 'Welcome to the server administration panel!',
+    isAuthenticated: req.session.isAuthenticated});
 });
 
 // Login page route
 ServerPanel.get('/login', (req, res) => {
     // Assuming you have a 'Login.ejs' view to render
-    res.render('Login', { pageTitle: 'Login' });
+    res.render('Login', { pageTitle: 'Login', isAuthenticated: req.session.isAuthenticated});
 });
 
 // Login logic

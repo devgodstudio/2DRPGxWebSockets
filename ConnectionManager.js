@@ -11,7 +11,8 @@ class ConnectionManager {
     }
 
     onConnection(ws) {
-        console.log('A user connected');
+
+        console.log('A client connected');
         this.clients.add(ws);
 
         ws.on('message', (message) => {
