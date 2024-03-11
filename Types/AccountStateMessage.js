@@ -2,8 +2,7 @@
 const DatabaseConnection = require('../DatabaseConnection');
 
 class AccountStateMessage {
-    constructor(AuthToken, User_ID, Username, Password, IsOnline, Last_Login_Time) {
-        this.AuthToken = AuthToken;
+    constructor(User_ID, Username, Password, IsOnline, Last_Login_Time) {
         this.User_ID = User_ID;
         this.Username = Username;
         this.Password = Password;
@@ -41,15 +40,28 @@ class AccountStateMessage {
 
     static setAllAccountStates(Password, IsOnline, Last_Login_Time) {
         return DatabaseConnection.executeQuery("UPDATE users SET Password = ?, IsOnline = ?, Last_Login_Time = ?", [Password, IsOnline, Last_Login_Time]);
-        return DatabaseConnection.executeQuery("UPDATE users SET Password = ?, IsOnline = ?, Last_Login_Time = ?", [Password, IsOnline, Last_Login_Time]);
     }
-
     static createAllAccountStates(Username, Password) {
         return DatabaseConnection.executeQuery("INSERT INTO users (Username, Password, IsOnline, Last_Login_Time) VALUES (?, ?, ?, ?)", [Username, Password, false, new Date()]);
     }
 
     static isUserOnline(Username) {
         return DatabaseConnection.executeQuerySingle("SELECT isonline FROM users WHERE Username = ?", [Username]);
+    }
+
+    //update user last login time
+    static updateLastLoginTime(Username, Last_Login_Time) {
+        return DatabaseConnection.executeQuery("UPDATE users SET Last_Login_Time = ? WHERE Username = ?", [Last_Login_Time, Username]);
+    }
+
+    //update user password
+    static updatePassword(Username, Password) {
+        return DatabaseConnection.executeQuery("UPDATE users SET Password = ? WHERE Username = ?", [Password, Username]);
+    }
+
+    //update user online status
+    static updateOnlineStatus(Username, IsOnline) {
+        return DatabaseConnection.executeQuery("UPDATE users SET IsOnline = ? WHERE Username = ?", [IsOnline, Username]);
     }
 }
 

@@ -28,13 +28,6 @@ class Validation{
     static hashPassword(password){
         return bcrypt.hash(password, 10); // Returns a promise
     }
-
-    static JwtToken() {
-
-        //generate a random string
-        const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-
-    }
 }
 
 //export the class

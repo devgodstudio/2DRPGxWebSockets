@@ -1,5 +1,4 @@
 const WebSocket = require('ws');
-const ClientStateMessage = require('./Types/ClientStateMessage');
 const ServerMessage = require('./Types/ServerMessage');
 const GameManager = require('./GameManager');
 
@@ -24,12 +23,11 @@ class ConnectionManager {
                 case "validate_game":
                     const clientState = JSON.parse(receivedMsg.Data); // Assuming Data is a JSON string of ClientStateMessage
                     if (clientState.Version !== parseInt(process.env.GAME_VERSION)) {
-                        const error = new ServerMessage("invalid_game_version", "Your game version is outdated. Please update your game to the latest version.");
+                        const error = new ServerMessage(null,"invalid_game_version", "Your game version is outdated. Please update your game to the latest version.");
                         ws.send(JSON.stringify(error));
                     } else {
-                        const success = new ServerMessage("valid_game_version", "Your game version is up to date, you may now login.");
+                        const success = new ServerMessage(null, "valid_game_version", "Your game version is up to date, you may now login.");
                         ws.send(JSON.stringify(success));
-                        console.log(JSON.stringify(success));
                     }
                     break;
                 // Inside an async function
@@ -38,20 +36,18 @@ class ConnectionManager {
                     const gameManager = new GameManager();
                     const loginResponse = await gameManager.login(clientState); // Await the promise
                     ws.send(JSON.stringify(loginResponse));
-                    break; // Assuming this is within a switch-case
+                    break; // Assuming this is within a switch-cas
                 }
                 default:
-                    const error = new ServerMessage("Error", "You have made an invalid request!");
+                    const error = new ServerMessage(null,"Error", "You have made an invalid request!");
                     ws.send(JSON.stringify(error));
                     break;
             }
-
-            //log the message
-            console.log(JSON.parse(msg));
         });
 
         ws.on('close', () => {
-            console.log('A user disconnected');
+
+            console.log('A client disconnected');
             this.clients.delete(ws);
         });
     }

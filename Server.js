@@ -24,4 +24,6 @@ server.listen(process.env.PORT, () => {
 });
 
 // This module now exports the server if needed elsewhere
-module.exports = server;
+module.exports = {
+    server
+}
